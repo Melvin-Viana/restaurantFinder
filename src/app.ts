@@ -1,4 +1,4 @@
-const { getLocationData, initMap } = require('./helpers');
+import { getLocationData, initMap }  from './helpers';
 
 // IIFE Invoke func on load
 (async () => {

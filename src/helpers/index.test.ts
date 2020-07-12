@@ -1,4 +1,5 @@
 import { getLocationData } from './index';
+import 'babel-polyfill';
 
 describe('Test out helper async helper functions', () => {
   it('getLocationData returns an object w/ latitude and longitude', async () => {
