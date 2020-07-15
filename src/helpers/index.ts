@@ -47,6 +47,13 @@ export const getNearbyEateries = async (lat: number, lng: number) : Promise<Arra
   return businesses;
 };
 
+export const createGoogleScript = (googleApiKey: string, element: any) : void => {
+  var script = element.createElement('script'),
+  scripts = element.getElementsByTagName('script')[0];
+  script.src = 'https://maps.googleapis.com/maps/api/js?key='+googleApiKey;
+  scripts.parentNode.insertBefore(script, scripts);
+}
+
 export const createMarkers = (businesses: Array<Object>, map: any): void => {
   businesses.forEach((business: {coordinates: any, name: string, image_url: string, categories: any, rating: number, review_count: number}, index: number) => {
     const { coordinates: {latitude, longitude}, name, image_url, categories, rating, review_count } = business;
@@ -69,7 +76,7 @@ export const createMarkers = (businesses: Array<Object>, map: any): void => {
           position: latLng,
           label: {
             text:''+(index+1),
-            color: "#4682B4",
+            color: "#FFF",
             fontSize: "10px",
             fontWeight: "bold"
           },

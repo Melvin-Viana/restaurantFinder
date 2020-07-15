@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { getLocationData, initMap, getNearbyEateries, createMarkers }  from '../helpers';
-
-// IIFE Invoke func on load
-
+import { getLocationData, initMap, getNearbyEateries, createMarkers, createGoogleScript }  from '../helpers';
 
 interface Props {
   googleApiKey: string;
 }
 
 export const App: React.FC <Props> = ({googleApiKey}) => {
-  var script = document.createElement('script'),
-  scripts = document.getElementsByTagName('script')[0];
-  script.src = 'https://maps.googleapis.com/maps/api/js?key='+googleApiKey;
-  scripts.parentNode.insertBefore(script, scripts);
+
+  createGoogleScript(googleApiKey, document);
 
   useEffect(() => {
+
+    // IIFE Invoke func on load
     (async () => {
       try {
         const { lat, lng } = await getLocationData();
