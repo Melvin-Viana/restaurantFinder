@@ -67,6 +67,12 @@ export const createMarkers = (businesses: Array<Object>, map: any): void => {
       });
       var marker = new google.maps.Marker({
           position: latLng,
+          label: {
+            text:''+(index+1),
+            color: "#4682B4",
+            fontSize: "10px",
+            fontWeight: "bold"
+          },
           title: name,
       });
       marker.addListener('mouseover' , () => {
