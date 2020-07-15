@@ -1,8 +1,13 @@
 require('regenerator-runtime/runtime');
 import axios from 'axios';
-import { GEO_API_KEY } from '../../config';
+import { GEO_API_KEY, YELP_API_KEY } from '../../config';
 
-export const getLocationData = async () => {
+interface Coordinates {
+  lat: number;
+  lng: number;
+}
+
+export const getLocationData = async () : Promise<Coordinates> => {
   const {
     data: {
       location: { lat, lng }
@@ -15,9 +20,62 @@ export const getLocationData = async () => {
   return { lat, lng };
 };
 
-export const initMap = (lat: number , lng: number) => {
+
+
+export const initMap = (lat: number , lng: number): Object => {
   return new google.maps.Map(document.getElementById('map'), {
     center: { lat, lng },
-    zoom: 8
+    zoom: 10
   });
 };
+
+
+export const getNearbyEateries = async (lat: number, lng: number) : Promise<Array<Object>> => {
+  const {data: {
+    businesses
+  }} =  await axios.get(
+    `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=food&latitude=${lat}&longitude=${lng}`,
+    {
+      headers: {
+        Authorization: `Bearer ${YELP_API_KEY}`,
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+
+  return businesses;
+};
+
+export const createMarkers = (businesses: Array<Object>, map: any): void => {
+  businesses.forEach((business: {coordinates: any, name: string, image_url: string, categories: any, rating: number, review_count: number}, index: number) => {
+    const { coordinates: {latitude, longitude}, name, image_url, categories, rating, review_count } = business;
+    const latLng = new google.maps.LatLng(latitude, longitude);
+    setTimeout(function() {
+      var contentString =
+    '<div id="content" style="width:95%; margin: auto">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    `<img style='height:120px;width:100%; overflow:hidden; display:block; border-radius:10%; margin:auto' src='${image_url}'/>`+
+    `<h2 id="firstHeading" class="firstHeading">${name}</h2>` +
+    `<span>${categories.map(cat=>cat.title).join(', ')}</span>` +
+    "</div>";
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        maxWidth: 175,
+        disableAutoPan: true
+      });
+      var marker = new google.maps.Marker({
+          position: latLng,
+          title: name,
+      });
+      marker.addListener('mouseover' , () => {
+        infowindow.open(map, marker);
+      })
+      marker.addListener('mouseout' , () => {
+        infowindow.close();
+      })
+      marker.setMap(map);
+    }, index * 200);
+  })
+}
