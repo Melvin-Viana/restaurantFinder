@@ -1,19 +1,28 @@
-const path = require('path');
-module.exports = {
-  entry: ["@babel/polyfill",'./src/App.js'],
+const { resolve } = require('path');
+
+const isProd = process.env.NODE_ENV === 'production';
+
+const config = {
+  mode: isProd ? 'production' : 'development',
+  entry: {
+    index: './src/index.tsx'
+  },
   output: {
-    path: path.resolve(__dirname, 'client/assets'),
+    path: resolve(__dirname, 'client/assets'),
     filename: 'build.js'
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  },
   module: {
-  rules: [
+    rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        test: /\.tsx?$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
       }
     ]
   }
 };
+
+module.exports = config;
