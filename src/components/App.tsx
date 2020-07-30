@@ -21,8 +21,8 @@ export const App: React.FC <Props> = () => {
         // Add map
         const map = initMap(lat, lng);
         const localBusinesses = await getNearbyEateries(lat, lng);
-        const vals = await createMarkers(localBusinesses, map);
-        delay(4100).then(()=>setRestaurantList(localBusinesses))
+        createMarkers(localBusinesses, map);
+        delay(2100).then(()=>setRestaurantList(localBusinesses))
       } catch (err) {
         console.error(err);
       }

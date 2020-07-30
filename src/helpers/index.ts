@@ -54,10 +54,13 @@ export const createGoogleScript = (googleApiKey: string, element: any) : void =>
   scripts.parentNode.insertBefore(script, scripts);
 }
 
+
 export const createMarkers = (businesses: Array<Object>, map: any): void => {
+  const output = []
   businesses.forEach((business: {coordinates: any, name: string, image_url: string, categories: any, rating: number, review_count: number}, index: number) => {
     const { coordinates: {latitude, longitude}, name, image_url, categories, rating, review_count } = business;
     const latLng = new google.maps.LatLng(latitude, longitude);
+
     setTimeout(function() {
       var contentString =
     '<div id="content" style="width:95%; margin: auto">' +
@@ -89,6 +92,6 @@ export const createMarkers = (businesses: Array<Object>, map: any): void => {
         infowindow.close();
       })
       marker.setMap(map);
-    }, index * 200);
+    }, index * 100);
   })
 }
