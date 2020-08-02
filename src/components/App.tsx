@@ -9,7 +9,18 @@ export const App: React.FC <Props> = () => {
 
 
   const [restaurauntList, setRestaurantList] = useState([]);
-  let delay = ms => new Promise(r => setTimeout(r, ms));
+  const [markerArray, setMarkers] = useState([]);
+  const [mapObject, setMap] = useState(null);
+  const [selectedIndex, setIndex] = useState(-1);
+
+  const displayInfo = (index: number, map: Object) => {
+    if(selectedIndex !== -1) {
+      markerArray[selectedIndex].infowindow.close();
+    }
+    const {marker, infowindow} = markerArray[index];
+    infowindow.open(map, marker);
+    setIndex(index);
+  };
 
   useEffect(() => {
 
@@ -18,11 +29,15 @@ export const App: React.FC <Props> = () => {
       try {
         //TODO: If queryData is not empty
         const { lat, lng } = await getLocationData();
-        // Add map
+        // Get google map object
         const map = initMap(lat, lng);
+        setMap(map);
+        // Get restaurant list
         const localBusinesses = await getNearbyEateries(lat, lng);
-        createMarkers(localBusinesses, map);
-        delay(2100).then(()=>setRestaurantList(localBusinesses))
+        // Get marker objects
+        const markers = await createMarkers(localBusinesses, map);
+        setMarkers(markers);
+        setRestaurantList(localBusinesses);
       } catch (err) {
         console.error(err);
       }
@@ -34,7 +49,7 @@ export const App: React.FC <Props> = () => {
   return (
     <React.Fragment>
       <div id="map"></div>
-      <RestaurantList businesses={restaurauntList}/>
+      <RestaurantList businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)}/>
     </React.Fragment>
   );
 };
