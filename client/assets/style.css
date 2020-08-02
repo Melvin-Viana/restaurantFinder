@@ -1,0 +1,52 @@
+body{
+  max-height:1080px;
+}
+@media screen and (min-width: 992px) {
+  #app{
+    display: grid;
+    grid-template-columns: 1fr  1fr;
+    gap: 1px 1px;
+    grid-template-areas: "Map Restaurant-List";
+  }
+
+  .Map { grid-area: Map;
+    width:100%;
+  }
+
+  .Restaurant-List {
+    grid-area: Restaurant-List;
+    width:100%;
+   }
+
+   #map{
+    height: 100vh !important;
+  }
+}
+
+
+#map{
+  height: 500px;
+}
+
+
+@keyframes nav {
+  from { opacity: 0; transform: translate3d(0, -25px, 0) }
+  to { opacity: 1; transform: translate3d(0, 0, 0) }
+}
+
+
+.my-node-enter, .my-node-appear {
+  animation: nav 0.2s ease-in-out forwards;
+  opacity: 0;
+}
+.my-node-enter-active, .my-node-appear-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
