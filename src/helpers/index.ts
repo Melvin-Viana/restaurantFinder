@@ -54,8 +54,8 @@ export const createGoogleScript = (googleApiKey: string, element: any) : void =>
   scripts.parentNode.insertBefore(script, scripts);
 }
 
-
-export const createMarkers = (businesses: Array<Object>, map: any): void => {
+//After 2100 seconds add markers to output array
+export const createMarkers = async (businesses: Array<Object>, map: any): Promise<Array<Object>> => {
   const output = []
   businesses.forEach((business: {coordinates: any, name: string, image_url: string, categories: any, rating: number, review_count: number}, index: number) => {
     const { coordinates: {latitude, longitude}, name, image_url, categories, rating, review_count } = business;
@@ -91,7 +91,16 @@ export const createMarkers = (businesses: Array<Object>, map: any): void => {
       marker.addListener('mouseout' , () => {
         infowindow.close();
       })
+      const markerInfo = {
+        marker,
+        infowindow
+      };
+      output.push(markerInfo);
       marker.setMap(map);
+
     }, index * 100);
-  })
+
+  });
+  await new Promise(r => setTimeout(r, 2100));
+  return output;
 }
