@@ -48,8 +48,8 @@ export const App: React.FC <Props> = () => {
 
   return (
     <React.Fragment>
-      <div id="map"></div>
-      <RestaurantList businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)}/>
+      <div id="map" className={'Map'}></div>
+      <RestaurantList  businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)}/>
     </React.Fragment>
   );
 };

@@ -5,7 +5,7 @@ import { GEO_API_KEY, YELP_API_KEY } from '../../config';
 interface Coordinates {
   lat: number;
   lng: number;
-}
+};
 
 export const getLocationData = async () : Promise<Coordinates> => {
   const {
@@ -20,15 +20,12 @@ export const getLocationData = async () : Promise<Coordinates> => {
   return { lat, lng };
 };
 
-
-
 export const initMap = (lat: number , lng: number): Object => {
   return new google.maps.Map(document.getElementById('map'), {
     center: { lat, lng },
-    zoom: 10
+    zoom: 13
   });
 };
-
 
 export const getNearbyEateries = async (lat: number, lng: number) : Promise<Array<Object>> => {
   const {data: {
@@ -52,7 +49,7 @@ export const createGoogleScript = (googleApiKey: string, element: any) : void =>
   scripts = element.getElementsByTagName('script')[0];
   script.src = 'https://maps.googleapis.com/maps/api/js?key='+googleApiKey;
   scripts.parentNode.insertBefore(script, scripts);
-}
+};
 
 //After 2100 seconds add markers to output array
 export const createMarkers = async (businesses: Array<Object>, map: any): Promise<Array<Object>> => {
@@ -103,4 +100,4 @@ export const createMarkers = async (businesses: Array<Object>, map: any): Promis
   });
   await new Promise(r => setTimeout(r, 2100));
   return output;
-}
+};

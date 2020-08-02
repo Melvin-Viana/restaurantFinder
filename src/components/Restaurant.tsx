@@ -14,7 +14,7 @@ interface Props {
 const Restaurant: React.FC<Props> = ({ businessData, restaurantIndex, restaruantClickHandler }) => {
 
   return (   <CSSTransition appear={true} in={true} timeout={1000} classNames="my-node">
-  <ListItem button onClick={()=>restaruantClickHandler(restaurantIndex)}>
+  <ListItem button onMouseEnter={()=>restaruantClickHandler(restaurantIndex)} onMouseLeave={()=>restaruantClickHandler(-1)}>
     <ListItemText>
     {businessData.name}
     </ListItemText>

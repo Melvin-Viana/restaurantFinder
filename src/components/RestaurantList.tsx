@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const RestaurantList: React.FC<Props> = ({businesses, restaruantClickHandler}) => {
-  return (<List>
+  return (<List dense={true} className={'.Restaurant-List'}>
     {businesses.map((business, index)=><Restaurant restaurantIndex={index} businessData={business} restaruantClickHandler={()=> restaruantClickHandler(index)}/>)}
   </List>);
 };
