@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/Melvin-Viana/restaurantFinder#readme",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "@types/jest": "^26.0.4",
+    "@types/react-transition-group": "^4.4.0",
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
     "cors": "^2.8.5",
@@ -27,6 +29,7 @@
     "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-transition-group": "^4.4.1",
     "regenerator-runtime": "^0.13.5",
     "ts-jest": "^26.1.1"
   },
