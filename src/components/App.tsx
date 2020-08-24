@@ -1,55 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { getLocationData, initMap, getNearbyEateries, createMarkers }  from '../helpers';
-import {RestaurantList} from './RestaurantList';
-interface Props {
-  googleApiKey: string;
-}
-
-export const App: React.FC <Props> = () => {
-
-
-  const [restaurauntList, setRestaurantList] = useState([]);
-  const [markerArray, setMarkers] = useState([]);
-  const [mapObject, setMap] = useState(null);
-  const [selectedIndex, setIndex] = useState(-1);
-
-  const displayInfo = (index: number, map: Object) => {
-    if(selectedIndex !== -1) {
-      markerArray[selectedIndex].infowindow.close();
-    }
-    const {marker, infowindow} = markerArray[index];
-    infowindow.open(map, marker);
-    setIndex(index);
-  };
-
-  useEffect(() => {
-
-    // Fetch data
-    const fetchData = async (queryData: string) => {
-      try {
-        //TODO: If queryData is not empty
-        const { lat, lng } = await getLocationData();
-        // Get google map object
-        const map = initMap(lat, lng);
-        setMap(map);
-        // Get restaurant list
-        const localBusinesses = await getNearbyEateries(lat, lng);
-        // Get marker objects
-        const markers = await createMarkers(localBusinesses, map);
-        setMarkers(markers);
-        setRestaurantList(localBusinesses);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    // Fetch Data
-    fetchData('');
-  },[])
-
+import React from 'react';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import {Home} from './Home';
+import {Login} from './Login';
+export const App: React.FC  = () => {
   return (
-    <React.Fragment>
-      <div id="map" className={'Map'}></div>
-      <RestaurantList  businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)}/>
-    </React.Fragment>
+  <BrowserRouter>
+    <Switch>
+      <Route path="/login" component={Login} />
+      <Route path="/" component={Home}/>
+    </Switch>
+  </BrowserRouter>
   );
-};
+}
