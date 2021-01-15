@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import LoadingOverlay from 'react-loading-overlay';
+import {ThreeDots} from '@agney/react-loading'
 import { getLocationData, initMap, getNearbyEateries, createMarkers }  from '../helpers';
 import {RestaurantList} from './RestaurantList';
 
@@ -10,6 +12,7 @@ export const Home: React.FC = () => {
   const [markerArray, setMarkers] = useState([]);
   const [mapObject, setMap] = useState(null);
   const [selectedIndex, setIndex] = useState(-1);
+  const [mapIsLoading, setLoading] = useState(true);
 
   const displayInfo = (index: number, map: Object) => {
     if(selectedIndex !== -1) {
@@ -29,12 +32,13 @@ export const Home: React.FC = () => {
         const { lat, lng } = await getLocationData();
         // Get google map object
         const map = initMap(lat, lng);
-        setMap(map);
         // Get restaurant list
         const localBusinesses = await getNearbyEateries(lat, lng);
         // Get marker objects
         const markers = await createMarkers(localBusinesses, map);
+        setMap(map);
         setMarkers(markers);
+        setLoading(false);
         setRestaurantList(localBusinesses);
       } catch (err) {
         console.error(err);
@@ -46,7 +50,12 @@ export const Home: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div id="map" className={'Map'}></div>
+      <LoadingOverlay
+        active={mapIsLoading}
+        spinner={<ThreeDots width="100" />}
+      >      
+        <div id="map" className={'Map'}></div>
+      </LoadingOverlay>
       <RestaurantList  businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)}/>
     </React.Fragment>
   );
