@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import {Home} from './Home';
 import {Login} from './Login';
 export const App: React.FC  = () => {
+  const [jwtToken, setJWT] = useState({});
+
   return (
-  <BrowserRouter>
+  <BrowserRouter> 
     <Switch>
       <Route path="/login" component={Login} />
-      <Route path="/" component={Home}/>
+      <Route exact path="/" component={Home}/>
     </Switch>
   </BrowserRouter>
   );

@@ -1,6 +1,6 @@
 require('regenerator-runtime/runtime');
 import axios from 'axios';
-import { GEO_API_KEY, YELP_API_KEY } from '../../config';
+import { GEO_API_KEY, YELP_API_KEY, HEROKU_PROXY_SERVER } from '../../config';
 
 interface Coordinates {
   lat: number;
@@ -31,7 +31,7 @@ export const getNearbyEateries = async (lat: number, lng: number) : Promise<Arra
   const {data: {
     businesses
   }} =  await axios.get(
-    `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=food&latitude=${lat}&longitude=${lng}`,
+    `${HEROKU_PROXY_SERVER}https://api.yelp.com/v3/businesses/search?term=food&latitude=${lat}&longitude=${lng}`,
     {
       headers: {
         Authorization: `Bearer ${YELP_API_KEY}`,
@@ -95,9 +95,9 @@ export const createMarkers = async (businesses: Array<Object>, map: any): Promis
       output.push(markerInfo);
       marker.setMap(map);
 
-    }, index * 100);
+    }, index * 50);
 
   });
-  await new Promise(r => setTimeout(r, 2100));
+  await new Promise(r => setTimeout(r, 2000));
   return output;
 };
