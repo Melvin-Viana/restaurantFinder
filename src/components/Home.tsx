@@ -6,17 +6,22 @@ import {RestaurantList} from './RestaurantList';
 
 
 export const Home: React.FC = () => {
-
-
-  const [restaurauntList, setRestaurantList] = useState([]);
-  const [markerArray, setMarkers] = useState([]);
-  const [mapObject, setMap] = useState(null);
+  interface Marker {
+    marker: object,
+    infowindow: object
+  }
+  
+  const anyType : any[] = [] 
+  const [restaurauntList, setRestaurantList] = useState(anyType);
+  const [markerArray, setMarkers] = useState(anyType)
+  const [mapObject, setMap] = useState({});
   const [selectedIndex, setIndex] = useState(-1);
   const [mapIsLoading, setLoading] = useState(true);
 
   const displayInfo = (index: number, map: Object) => {
     if(selectedIndex !== -1) {
-      markerArray[selectedIndex].infowindow.close();
+      const {infowindow} = markerArray[selectedIndex];
+      infowindow.close();
     }
     const {marker, infowindow} = markerArray[index];
     infowindow.open(map, marker);

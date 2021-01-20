@@ -8,15 +8,20 @@ interface Coordinates {
   lng: number;
 };
 
+
 interface Business {
   coordinates: {latitude:number, longitude:number}, 
   name: string, 
   image_url: string, 
-  categories: any, 
+  categories: {cat: {title:string}}, 
   rating: number, 
   review_count: number
 }
 
+interface Marker {
+  marker: object,
+  infowindow: object
+}
 
 export const getLocationData = async () : Promise<Coordinates> => {
   const {
@@ -31,14 +36,14 @@ export const getLocationData = async () : Promise<Coordinates> => {
   return { lat, lng };
 };
 
-export const initMap = (lat: number , lng: number): Object => {
+export const initMap = (lat: number , lng: number): any => {
   return new google.maps.Map(document.getElementById('map'), {
     center: { lat, lng },
     zoom: 13
   });
 };
 
-export const getNearbyEateries = async (lat: number, lng: number) : Promise<Array<Business>> => {
+export const getNearbyEateries = async (lat: number, lng: number) : Promise<Business[]> => {
   const {data: {
     businesses
   }} =  await axios.get(
@@ -63,9 +68,9 @@ export const createGoogleScript = (googleApiKey: string, element: any) : void =>
 };
 
 //After 2100 seconds add markers to output array
-export const createMarkers = async (businesses: Array<Business>, map: any): Promise<Array<Object>> => {
-  const output = []
-  businesses.forEach((business: Business, index: number): void => {
+export const createMarkers = async (businesses: Array<Business>, map: any): Promise<Marker[]> => {
+  const output: Marker[] | PromiseLike<Marker[]> = []
+  businesses.forEach((business: Business, index: number): any => {
     const { coordinates: {latitude, longitude}, name, image_url, categories, rating, review_count } = business;
     const latLng = new google.maps.LatLng(latitude, longitude);
 
