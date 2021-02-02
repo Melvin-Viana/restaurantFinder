@@ -33,6 +33,7 @@ export const getLocationData = async () : Promise<Coordinates> => {
       'Content-Type': 'application/json'
     }
   });
+  console.log(lat,lng)
   return { lat, lng };
 };
 

@@ -37,6 +37,7 @@ export const Home: React.FC = () => {
         const { lat, lng } = await getLocationData();
         // Get google map object
         const map = initMap(lat, lng);
+        console.log(map)
         // Get restaurant list
         const localBusinesses = await getNearbyEateries(lat, lng);
         // Get marker objects
