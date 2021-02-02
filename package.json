@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack --mode production",
-    "start-server": "node backend/server.ts"
+    "build": "webpack --mode production; tsc backend/*.ts backend/*/*.ts --outDir dist/backend",
+    "start": "node dist/backend/server.js"
   },
   "repository": {
     "type": "git",

@@ -5,11 +5,11 @@ const app = express();
 
 app.use(cors());
 
-app.use(express.static('client'));
+app.use(express.static('dist/client'));
 
 // Handles any requests that don't match the ones above
 app.get('*', (req:any, res:any) => {
-  res.sendFile(path.resolve('./client/index.html'));
+  res.sendFile(path.resolve('./dist/client/index.html'));
 });
 
 app.listen(process.env.PORT || 3000, () => {
