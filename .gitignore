@@ -1,3 +1,4 @@
 node_modules/
 config/
-client/assets/build.js
+dist/client/assets/build.js
+dist/backend
