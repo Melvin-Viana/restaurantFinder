@@ -1,33 +1,19 @@
-// const handleLogin = () => {
-//     axios.post("/login",{username,password})
-//       .then(res=>{
-//         console.log(res.data)
-//         if(res.data.err) {
-//           throw new Error(res.data.err)
-//         }
-//         window.location.href = res.data.redirect;
-//       })
-//       .catch((err)=>{
-//         alert(err);
-//       })
-//   };
 
-//   const handleSignUp = () => {
-//     axios.post("/signup",{username,password})
-//       .then(res=>{
-//         if(res.data.err) {
-//           alert('User exists in DB');
-//         }
-//         // window.location.href = res.data.redirect;
-//       });
+const axios = require('axios');
 
 
-const login = (username: string,password: string): void =>{
-    console.log(username,password)
-};
-
-const signup = (username: string, password:string): void => {
-    console.log(username,password)
+const handleLogin =  async (username: string, password: string, APP_URL, formType: string): Promise<String> =>
+{ 
+    const URL = `${APP_URL}/api/${formType}`;
+    const data = await axios.post(URL, {username,password})
+        .then((res: any) => {
+            return res.data;
+        });
+    return data;
 }
+const login =  (username: string, password: string, APP_URL: string): Promise<String> => handleLogin(username, password, APP_URL, 'login')
 
-module.exports = {login, signup}
+const signup = (username: string, password: string, APP_URL: string): Promise<String> => handleLogin(username, password, APP_URL, 'signup')
+
+
+export {login, signup}
