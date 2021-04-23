@@ -1,18 +1,30 @@
-import React from 'react';
-import {Component, useState} from 'react';
+import React, { useEffect } from 'react';
+import { useState} from 'react';
 import {FormControl, FormHelperText, Button, Paper, Tabs, Tab, TextField} from '@material-ui/core';
-import axios from 'axios';
-import loginHelpers from '../helpers/loginHelpers';
+import {login, signup} from '../helpers/loginHelpers';
 
-console.log(loginHelpers['login'])
-console.log(loginHelpers['signup'])
+interface Props {
+  setJWT : (str: string) => void,
+}
 
-export const Login = () => {
+export const Login: React.FC<Props> = ({setJWT}) => {
   const [username, setUser] = useState('');
   const [password, setPassword] = useState('');
-  const [currentForm, setForm] = useState('login')
-  const handleChange = (event: any, value: 'string') =>{setForm(value)}
-  
+  const [currentForm, setForm] = useState('login');
+  const [loginError, setError] = useState('');
+
+  const handleChange = (e:any, val:string) =>{setForm(val)}
+  const handleLogin = async (loginHandler: Function) => {
+    // @ts-ignore: Unreachable code error
+    const data = await loginHandler(username, password, envKeys.REACT_APP_URL) 
+    
+    if(data.includes('User') || data.includes('Password')) {
+      setError(data)
+    } else {
+      setError('')
+      setJWT(data)
+    }
+  };
   return (<React.Fragment>
     <Paper square>
       <Tabs
@@ -38,7 +50,6 @@ export const Login = () => {
             onChange={(e)=>setUser(e.target.value)}
             value={username}
             />
-      <FormHelperText id="user-text">Enter User Name</FormHelperText>
       <TextField
             id="password"
             label="Password"
@@ -49,10 +60,12 @@ export const Login = () => {
             aria-describedby="password"
             onChange={(e)=>setPassword(e.target.value)}
             value={password}
-            />    <FormHelperText id="password">Enter Password</FormHelperText>
-        <Button onClick={()=> loginHelpers[currentForm](username,password)}>{`${currentForm}`}</Button>
+            />
+        <Button onClick={()=> handleLogin(currentForm === 'login' ? login : signup) }>{`${currentForm}`}</Button>
       </FormControl>
+      {loginError !== '' ? <p>`{loginError}`</p> : null}
     </Paper>
+    
   </React.Fragment>);
   };
  
