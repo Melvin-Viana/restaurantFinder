@@ -1,3 +1,4 @@
+// @ts-nocheck
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -6,9 +7,9 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   restaurants: []
 });
-
 UserSchema.pre('save', function(next) {
   const user = this;
+  
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) return next();
 

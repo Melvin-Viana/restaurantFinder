@@ -11,8 +11,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use(express.static('dist/client'));
-const REACT_APP_URL = process.env.REACT_APP_URL;
-console.log(REACT_APP_URL)
+
 // API routes here
 app.use('/api', apiRoutes,);
 
