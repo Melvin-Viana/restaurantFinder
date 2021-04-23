@@ -10,15 +10,16 @@ interface Props {
   businessData: {name:string};
   restaurantIndex: number;
   restaruantClickHandler: (index: number) => void;
+  hideButton: boolean;
 }
-const Restaurant: React.FC<Props> = ({ businessData, restaurantIndex, restaruantClickHandler }) => {
+const Restaurant: React.FC<Props> = ({ businessData, restaurantIndex, hideButton, restaruantClickHandler }) => {
 
   return (   <CSSTransition appear={true} in={true} timeout={1000} classNames="my-node">
   <ListItem button onMouseEnter={()=>restaruantClickHandler(restaurantIndex)} onMouseLeave={()=>restaruantClickHandler(-1)}>
     <ListItemText>
     {businessData.name}
     </ListItemText>
-    <button onClick={(e)=>{  e.stopPropagation(); console.log('hey')}}>Add to list</button>
+    {hideButton ? <button onClick={(e)=>{  e.stopPropagation(); console.log('hey')}}>Add to list</button> : null}
   </ListItem></CSSTransition>);
 };
 
