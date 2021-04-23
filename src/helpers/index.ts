@@ -28,7 +28,7 @@ export const getLocationData = async () : Promise<Coordinates> => {
     data: {
       location: { lat, lng }
     }
-  } = await axios.get(`https://geo.ipify.org/api/v1?apiKey=at_${GEO_API_KEY}`, {
+  } = await axios.get(`https://geo.ipify.org/api/v1?apiKey=${GEO_API_KEY}`, {
     headers: {
       'Content-Type': 'application/json'
     }
