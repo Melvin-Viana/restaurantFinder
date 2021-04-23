@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import LoadingOverlay from 'react-loading-overlay';
+// @ts-ignore
+import LoadingOverlay from 'react-loading-overlay'; 
+// @ts-ignore
 import Cookies from 'js-cookie';
 import {ThreeDots} from '@agney/react-loading'
 import { getLocationData, initMap, getNearbyEateries, createMarkers }  from '../helpers';
 import {RestaurantList} from './RestaurantList';
 
-
-
 export const Home: React.FC = () => {
-  interface Marker {
-    marker: object,
-    infowindow: object
-  }
   
   const anyType : any[] = [] 
   const [restaurauntList, setRestaurantList] = useState(anyType);
@@ -51,6 +47,7 @@ export const Home: React.FC = () => {
   useEffect(() => {
     // Get cookie
     setJWT(Cookies.get('JWT'));
+    // Fetch map/restaurant data
     fetchData('');
   },[])
 
@@ -62,7 +59,7 @@ export const Home: React.FC = () => {
       >      
         <div id="map" className={'Map'}></div>
       </LoadingOverlay>
-      <RestaurantList  businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)} hideButtons={JWT}/>
+      <RestaurantList  businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)} hideButtons={JWT !== '' || JWT === undefined}/>
     </React.Fragment>
   );
 };
