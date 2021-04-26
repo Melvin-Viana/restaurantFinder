@@ -1,0 +1,8 @@
+
+module.exports = async (UserSchema:any, username:string, password:string) => {
+    const userExists = await UserSchema.exists({username});
+    if (userExists) throw 'User Exists';
+    if (password === '') throw 'Password required';
+    const user = await UserSchema.create({username, password});
+    return user;
+};

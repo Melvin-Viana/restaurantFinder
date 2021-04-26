@@ -1,9 +1,14 @@
-const { resolve } = require('path');
+const  { resolve } = require('path');
 
-const isProd = process.env.NODE_ENV === 'production';
-
+const webpack = require('webpack')
+const dotenv = require('dotenv');
+const envKeys = dotenv.config().parsed
 const config = {
-  mode: isProd ? 'production' : 'development',
+  // https://github.com/motdotla/dotenv/issues/233
+  
+  node: {
+    fs: "empty",
+  },
   entry: {
     index: './src/index.tsx'
   },
@@ -22,7 +27,13 @@ const config = {
         exclude: /node_modules/
       }
     ]
-  }
+  }, 
+  plugins: [
+    new webpack.DefinePlugin({
+      'envKeys': JSON.stringify(envKeys)
+    })
+  ]
+ 
 };
 
 module.exports = config;
