@@ -1,7 +1,7 @@
 const createUser = require('../controllers/createUser');
 const findUser = require('../controllers/findUser');
 const loginForm = require('../controllers/loginForm');
-
+// @ts-ignore: Ignore User type; it's a mongoose User Model
 module.exports = (express: any, User) => {
     const router = express.Router();
     router.get('/hey', (req:any, res:any)=> {

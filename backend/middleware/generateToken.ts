@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const {JWT_SECRET} = process.env;
-
-// @ts-ignore: Unreachable code error
+// @ts-ignore: Userdata = User Mongoose model
 module.exports = (userdata) => {
     // https://github.com/bradtraversy/nodeauthapp/issues/3
     // Turn user model into plain JSON object and create JWT token

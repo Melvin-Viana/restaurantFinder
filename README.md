@@ -19,9 +19,16 @@ GEO_API_KEY=
 HEROKU_PROXY_SERVER=
 DB_URI=
 REACT_APP_URL=
+JWT_SECRET=
 ```
 Acquire your API keys, MongoDB URI, and Client URL and place your values after the equals signs.
 
+
+* If you want to create separate .env files for separate environments add your file path to `.config()` in:
+- backend/server.ts: Line 7 
+- webpack.config.js: Line 7
+
+i.e. `dotenv.config('./example.env`)`
 ### API KEYS
 - Generate API Keys for the following services:
 1. YELP - https://www.yelp.com/developers/documentation/v3/authentication
@@ -49,6 +56,10 @@ git push heroku master
 - This is URL for the client
 - The current setup is for 'http://localhost:3000' on a local machine
 - For on a production environment fill it with URL the app is hosted on
+
+### JWT_SECRET
+- A secret password for accessing your JWT token
+- This can be any password; but this would be a unique password to this application
 
 ## Usage
 - Install dependencies: `npm install`
