@@ -1,7 +1,7 @@
 require('regenerator-runtime/runtime');
 import axios from 'axios';
 import { NumberLiteralType } from 'typescript';
-import { GEO_API_KEY, YELP_API_KEY, HEROKU_PROXY_SERVER } from '../../config';
+const { GEO_API_KEY, YELP_API_KEY, HEROKU_PROXY_SERVER } = envKeys;
 
 interface Coordinates {
   lat: number;

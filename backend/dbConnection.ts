@@ -1,6 +1,6 @@
 // @ts-nocheck
 const db = require('mongoose');
-const mongoURI = process.env.DB_URI ||'mongodb://localhost:27017/restaurantFinder';
+const mongoURI = process.env.DB_URI;
 const dbConnection = db.connect(mongoURI, {useNewUrlParser: true});
 
 dbConnection
