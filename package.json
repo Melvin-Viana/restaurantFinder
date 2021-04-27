@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "webpack --mode production; tsc backend/*.ts backend/*/*.ts --outDir dist/backend",
     "client-build": "webpack --mode production",
-    "build-backend": "tsc backend/*.ts backend/*/*.ts --outDir dist/backend",
+    "backend-build": "tsc backend/*.ts backend/*/*.ts --outDir dist/backend",
     "start": "node dist/backend/server.js"
   },
   "repository": {
