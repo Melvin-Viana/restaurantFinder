@@ -1,6 +1,6 @@
 require('regenerator-runtime/runtime');
 import axios from 'axios';
-import { NumberLiteralType } from 'typescript';
+// @ts-ignore: envKeys created as webpackPlugin
 const { GEO_API_KEY, YELP_API_KEY, HEROKU_PROXY_SERVER } = envKeys;
 
 interface Coordinates {
@@ -8,12 +8,15 @@ interface Coordinates {
   lng: number;
 };
 
+interface Category {
+  title: string
+}
 
 interface Business {
   coordinates: {latitude:number, longitude:number}, 
   name: string, 
   image_url: string, 
-  categories: {cat: {title:string}}, 
+  categories: Array<Category>, 
   rating: number, 
   review_count: number
 }
@@ -38,6 +41,7 @@ export const getLocationData = async () : Promise<Coordinates> => {
 };
 
 export const initMap = (lat: number , lng: number): any => {
+  // @ts-ignore:
   return new google.maps.Map(document.getElementById('map'), {
     center: { lat, lng },
     zoom: 13
@@ -73,6 +77,7 @@ export const createMarkers = async (businesses: Array<Business>, map: any): Prom
   const output: Marker[] | PromiseLike<Marker[]> = []
   businesses.forEach((business: Business, index: number): any => {
     const { coordinates: {latitude, longitude}, name, image_url, categories, rating, review_count } = business;
+    // @ts-ignore: Gooogle object is created in browser
     const latLng = new google.maps.LatLng(latitude, longitude);
 
     setTimeout(function() {
@@ -82,13 +87,15 @@ export const createMarkers = async (businesses: Array<Business>, map: any): Prom
     "</div>" +
     `<img style='height:120px;width:100%; overflow:hidden; display:block; border-radius:10%; margin:auto' src='${image_url}'/>`+
     `<h2 id="firstHeading" class="firstHeading">${name}</h2>` +
-    `<span>${categories.map(cat=>cat.title).join(', ')}</span>` +
+    `<span>${categories.map(cat => cat.title).join(', ')}</span>` +
     "</div>";
+      // @ts-ignore:
       var infowindow = new google.maps.InfoWindow({
         content: contentString,
         maxWidth: 175,
         disableAutoPan: true
       });
+      // @ts-ignore:
       var marker = new google.maps.Marker({
           position: latLng,
           label: {

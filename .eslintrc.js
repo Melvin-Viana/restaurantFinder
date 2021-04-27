@@ -7,6 +7,7 @@ module.exports = {
     jest: true,
     node: true
   },
+  ignorePatterns: ['dist/backend/'],
   rules: {
     'jsx-a11y/href-no-hash': ['off'],
     'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],

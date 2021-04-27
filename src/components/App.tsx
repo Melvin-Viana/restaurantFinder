@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
+// @ts-ignore:
 import Cookies from 'js-cookie';
+// @ts-ignore:
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import {Home} from './Home';
 import {Login} from './Login';

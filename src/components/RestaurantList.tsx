@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 interface Props {
   businesses: Array<{name:string}>;
   restaruantClickHandler: (index : number ) => void;
-  hideButtons: Boolean;
+  hideButtons: boolean;
 }
 
 export const RestaurantList: React.FC<Props> = ({businesses, restaruantClickHandler, hideButtons}) => {
