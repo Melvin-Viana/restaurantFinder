@@ -1,6 +1,4 @@
-
 const axios = require('axios');
-
 
 const handleLogin =  async (username: string, password: string, APP_URL:string, formType: string): Promise<String> =>
 { 
@@ -14,6 +12,5 @@ const handleLogin =  async (username: string, password: string, APP_URL:string, 
 const login =  (username: string, password: string, APP_URL: string): Promise<String> => handleLogin(username, password, APP_URL, 'login')
 
 const signup = (username: string, password: string, APP_URL: string): Promise<String> => handleLogin(username, password, APP_URL, 'signup')
-
 
 export {login, signup}

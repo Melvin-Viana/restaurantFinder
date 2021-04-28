@@ -6,7 +6,6 @@ import { getLocationData, initMap }  from './helpers';
     const { lat, lng } = await getLocationData();
     // Add map
     const map = initMap(lat, lng);
-    console.log(map);
   } catch (err) {
     console.error(err);
   }
