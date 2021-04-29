@@ -7,6 +7,7 @@ body{
     grid-template-columns: 1fr  1fr;
     gap: 1px 1px;
     grid-template-areas: "Map Restaurant-List";
+    height:inherit;
   }
 
   .Map { 
@@ -26,6 +27,10 @@ body{
 
 #map{
   height: 500px;
+}
+
+#Home ul {
+  height: 726px;
 }
 
 @keyframes nav {
