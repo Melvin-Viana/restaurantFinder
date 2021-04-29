@@ -65,4 +65,5 @@ git push heroku master
 - Install dependencies: `npm install`
 - Create environment variables on .env file
 - Compile frontend and backend builds: `npm run build`
+- Make sure MongoDB is running on your local machine
 - Start the project: `npm start`
