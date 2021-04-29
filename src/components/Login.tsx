@@ -24,8 +24,8 @@ export const Login: React.FC<Props> = ({setJWT}) => {
       setJWT(data)
     }
   };
-  return (<React.Fragment>
-    <Paper square>
+  return (<div className=''>
+    <Paper square={false}>
       <Tabs
         indicatorColor="primary"
         textColor="primary"
@@ -33,39 +33,38 @@ export const Login: React.FC<Props> = ({setJWT}) => {
         variant="fullWidth"
         onChange={handleChange}
         value={currentForm}
+        className='background-primary'
       >
-         <Tab label="Login" value="login"/>
+         <Tab label="Login" value="login" />
          <Tab label="SignUp" value="signup" />
       </Tabs>
-      <FormControl style={{width:"100%"}}>
+      <FormControl style={{width:"100%"}} className='bg-light'>
         <TextField
             id="user-text"
-            label="UserName"
             type="text"
             placeholder="UserName"
             variant="outlined"
-            fullWidth
             aria-describedby="user-text"
             onChange={(e)=>setUser(e.target.value)}
             value={username}
+            className='my-3'
             />
       <TextField
             id="password"
-            label="Password"
             type="password"
             placeholder="Password"
             variant="outlined"
-            fullWidth
             aria-describedby="password"
             onChange={(e)=>setPassword(e.target.value)}
             value={password}
+            className='my-3'
             />
         <Button onClick={()=> handleLogin(currentForm === 'login' ? login : signup) }>{`${currentForm}`}</Button>
       </FormControl>
       {loginError !== '' ? <p>`{loginError}`</p> : null}
     </Paper>
     
-  </React.Fragment>);
+  </div>);
   };
  
 

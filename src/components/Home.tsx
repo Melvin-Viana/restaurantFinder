@@ -52,7 +52,7 @@ export const Home: React.FC = () => {
   },[])
 
   return (
-    <React.Fragment>
+    <div id='Home' className='bg-light'>
       <LoadingOverlay
         active={mapIsLoading}
         spinner={<ThreeDots width="100" />}
@@ -60,6 +60,6 @@ export const Home: React.FC = () => {
         <div id="map" className={'Map'}></div>
       </LoadingOverlay>
       <RestaurantList  businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)} hideButtons={JWT !== '' || JWT === undefined}/>
-    </React.Fragment>
+    </div>
   );
 };

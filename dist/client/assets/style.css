@@ -2,15 +2,15 @@ body{
   max-height:1080px;
 }
 @media screen and (min-width: 992px) {
-  #app{
+  #Home{
     display: grid;
     grid-template-columns: 1fr  1fr;
     gap: 1px 1px;
     grid-template-areas: "Map Restaurant-List";
   }
 
-  .Map { grid-area: Map;
-    width:100%;
+  .Map { 
+    grid-area: Map;
   }
 
   .Restaurant-List {
@@ -28,13 +28,18 @@ body{
   height: 500px;
 }
 
-
 @keyframes nav {
   from { opacity: 0; transform: translate3d(0, -25px, 0) }
   to { opacity: 1; transform: translate3d(0, 0, 0) }
 }
 
+#app {
+  padding:0;
+}
 
+.Map {
+  width: 100%;
+}
 .my-node-enter, .my-node-appear {
   animation: nav 0.2s ease-in-out forwards;
   opacity: 0;
@@ -49,4 +54,16 @@ body{
 .my-node-exit-active {
   opacity: 0;
   transition: opacity 200ms;
+}
+
+/* RESUABLE STYLES */
+.background-primary {
+  background: #95afc0;
+}
+.background-secondary {
+  background: #dff9fb;
+}
+
+.background-grey {
+  background: #535c68;
 }
