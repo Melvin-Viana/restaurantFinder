@@ -1,5 +1,13 @@
+@font-face {
+  font-family: "Beba";
+  src: url("./BebasNeue-Regular.ttf");
+}
 body{
   max-height:1080px;
+}
+
+h1 {
+  font-family: 'Beba';
 }
 @media screen and (min-width: 992px) {
   #Home{
@@ -8,6 +16,7 @@ body{
     gap: 1px 1px;
     grid-template-areas: "Map Restaurant-List";
     height:inherit;
+    max-width:950px;
   }
 
   .Map { 
@@ -23,7 +32,9 @@ body{
     height: 100vh !important;
   }
 }
-
+@media screen and (min-width: 442px) {
+  #Home{ width:75%}
+}
 
 #map{
   height: 500px;
@@ -31,6 +42,9 @@ body{
 
 #Home ul {
   height: 726px;
+}
+#Home ul li{
+  font-size: 12px;
 }
 
 @keyframes nav {
