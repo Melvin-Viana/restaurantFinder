@@ -40,8 +40,11 @@ h1 {
   height: 500px;
 }
 
-#Home ul {
-  height: 726px;
+.long-list {
+  height: 850px;
+}
+.wishlist-button {
+  margin: 2.5em 0;
 }
 #Home ul li{
   font-size: 12px;
