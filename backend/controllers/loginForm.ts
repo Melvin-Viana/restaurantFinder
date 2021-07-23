@@ -1,4 +1,4 @@
-const generateToken = require('../middleware/generateToken');
+const {generateToken} = require('../middleware/tokenMiddleware');
 
 // @ts-ignore: Unreachable code error
 module.exports = async (req, res, loginController, User) => {

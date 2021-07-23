@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static('dist/client'));
 
 // API routes here
-app.use('/api', apiRoutes,);
+app.use('/api', apiRoutes);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req:any, res:any) => {
