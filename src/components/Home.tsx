@@ -7,7 +7,11 @@ import {ThreeDots} from '@agney/react-loading'
 import { getLocationData, initMap, getNearbyEateries, createMarkers }  from '../helpers';
 import {RestaurantList} from './RestaurantList';
 
-export const Home: React.FC = () => {
+interface Props {
+  cookies: any
+}
+
+export const Home: React.FC<Props> = ({cookies}) => {
   
   const anyType : any[] = [] 
   const [restaurauntList, setRestaurantList] = useState(anyType);
@@ -46,20 +50,19 @@ export const Home: React.FC = () => {
   //
   useEffect(() => {
     // Get cookie
-    setJWT(Cookies.get('JWT'));
+    setJWT(cookies.get('JWT'));
     // Fetch map/restaurant data
     fetchData('');
   },[])
-
   return (
-    <div id='Home' className='bg-light'>
+    <div id='Home' className='bg-light m-auto'>
       <LoadingOverlay
         active={mapIsLoading}
         spinner={<ThreeDots width="100" />}
       >      
         <div id="map" className={'Map'}></div>
       </LoadingOverlay>
-      <RestaurantList  businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)} hideButtons={JWT !== '' || JWT === undefined}/>
+      <RestaurantList  businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)} showButtons={JWT !== undefined}/>
     </div>
   );
 };
