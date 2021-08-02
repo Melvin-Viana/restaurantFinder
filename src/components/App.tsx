@@ -33,7 +33,7 @@ export class App extends React.Component {
   render(){
     return (
     <BrowserRouter> 
-      <h1> Restaurant Finder </h1>
+      <h1 className='home-heading'>🍽️ Restaurant Finder 🔍</h1>
       <Switch>
         <Route path="/login">
         {(this.state.jwToken === undefined) ? <Login setJWT={(val)=> this.setState({jwToken: val})} />: <Redirect to ="/" />} 

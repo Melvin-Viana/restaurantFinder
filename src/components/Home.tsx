@@ -33,6 +33,7 @@ export const Home: React.FC<Props> = ({cookies}) => {
     try {
       //TODO: If queryData is not empty
       const { lat, lng } = await getLocationData();
+      console.log(lat,lng)
       // Get google map object
       const map = initMap(lat, lng);
       // Get restaurant list

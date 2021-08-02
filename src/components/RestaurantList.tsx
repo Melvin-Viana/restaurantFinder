@@ -27,6 +27,6 @@ export const RestaurantList: React.FC<Props> = ({businesses, restaruantClickHand
   },[businesses])
   return (<List dense={true} className={`Restaurant-List ${!loading && 'long-list'}`}>
     {businesses.map((business, index)=><Restaurant restaurantIndex={index} businessData={business} showButton={restaurantWishList[0].has(business.name) === false && showButtons} restaruantClickHandler={()=> restaruantClickHandler(index)}/>)}
-    {loading &&<OpenWishList/>}
+    {loading &&<OpenWishList wishlist = {[...restaurantWishList[0].values()]}/>}
   </List>);
 };
