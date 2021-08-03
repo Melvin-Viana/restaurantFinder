@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack --mode production; tsc backend/*.ts backend/*/*.ts --outDir dist/backend",
+    "build": "webpack --mode production; tsc backend/*.ts backend/*/*.ts --outDir dist",
     "client-build": "webpack --mode production",
-    "backend-build": "tsc backend/*.ts backend/*/*.ts --outDir dist/backend",
-    "start": "node dist/backend/server.js"
+    "backend-build": "tsc backend/*.ts backend/*/*.ts --outDir dist",
+    "start": "cd dist && node server.js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "babel-polyfill": "^6.26.0",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "find-config": "^1.0.0",
     "js-cookie": "^2.2.1",
