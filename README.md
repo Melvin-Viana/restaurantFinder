@@ -18,7 +18,6 @@ GOOGLE_API_KEY=
 GEO_API_KEY=
 HEROKU_PROXY_SERVER=
 DB_URI=
-REACT_APP_URL=
 JWT_SECRET=
 ```
 Acquire your API keys, MongoDB URI, and Client URL and place your values after the equals signs.
@@ -51,11 +50,6 @@ git push heroku master
 - It may vary depending on what system your running on, for running this app on your local machine
 - MongoDB URI Docs - https://docs.mongodb.com/manual/reference/connection-string/
 -  Example for URI: 'mongodb://localhost:27017/restaurantFinder'
-
-### REACT_APP_URL
-- This is URL for the client
-- The current setup is for 'http://localhost:3000' on a local machine
-- For on a production environment fill it with URL the app is hosted on
 
 ### JWT_SECRET
 - A secret password for accessing your JWT token
