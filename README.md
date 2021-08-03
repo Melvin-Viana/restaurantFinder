@@ -1,4 +1,4 @@
-# Restaurant Finder
+# 🍽️🔍🗺️ Restaurant Finder 
 Find the nearest restaurants using the user's IP.
 
 ## Prerequesites
@@ -67,3 +67,6 @@ git push heroku master
 - Compile frontend and backend builds: `npm run build`
 - Make sure MongoDB is running on your local machine
 - Start the project: `npm start`
+
+## Deploy onto Heroku
+- https://gist.github.com/Melvin-Viana/14c6a0f2d3d226c1b082058b5d258e87

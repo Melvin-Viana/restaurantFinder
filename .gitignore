@@ -1,5 +1,6 @@
 node_modules/
 config/
-dist/client/assets/build.js
+dist/public/assets/build.js
 dist/backend
 .env
+*/.Procfile
