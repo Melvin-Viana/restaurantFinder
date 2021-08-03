@@ -14,7 +14,7 @@ const config = {
     index: './src/index.tsx'
   },
   output: {
-    path: resolve(__dirname, 'dist/client/assets'),
+    path: resolve(__dirname, 'dist/public/assets'),
     filename: 'build.js'
   },
   resolve: {
