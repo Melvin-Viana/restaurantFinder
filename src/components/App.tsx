@@ -5,8 +5,10 @@ import Cookies from 'universal-cookie';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import {Home} from './Home';
 import {Login} from './Login';
+import LoginLink from './LoginLink';
 import axios from 'axios';
 const cookies = new Cookies(); 
+
 const {REACT_APP_URL} = envKeys;
 export class App extends React.Component {
 
@@ -19,7 +21,7 @@ export class App extends React.Component {
   componentDidMount() {
     if (this.state.jwToken !== undefined) {
       // Verify Token - Token is removed from browser when cookie is expired or user doesn't exist
-      axios.get(`${REACT_APP_URL}/api/verifyUser`, {token: this.state.jwToken}).catch((err)=>{
+      axios.get(`/api/verifyUser`, {token: this.state.jwToken}).catch((err)=>{
         console.error(err);
         cookies.remove('JWT');
         this.setState({jwtToken: undefined})
@@ -34,6 +36,7 @@ export class App extends React.Component {
     return (
     <BrowserRouter> 
       <h1 className='home-heading'>🍽️ Restaurant Finder 🔍</h1>
+      {this.state.jwToken === undefined && <LoginLink/>}
       <Switch>
         <Route path="/login">
         {(this.state.jwToken === undefined) ? <Login setJWT={(val)=> this.setState({jwToken: val})} />: <Redirect to ="/" />} 

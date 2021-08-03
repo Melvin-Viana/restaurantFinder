@@ -63,7 +63,7 @@ export const Home: React.FC<Props> = ({cookies}) => {
       >      
         <div id="map" className={'Map'}></div>
       </LoadingOverlay>
-      <RestaurantList  businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)} showButtons={JWT !== undefined}/>
+      <RestaurantList businesses={restaurauntList} restaruantClickHandler={(index)=>displayInfo(index,mapObject)} showButtons={JWT !== undefined}/>
     </div>
   );
 };

@@ -17,14 +17,13 @@ interface Props {
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
-const {REACT_APP_URL} = envKeys;
 
 const Restaurant: React.FC<Props> = ({ businessData:{name: restaurantName}, restaurantIndex, showButton, restaruantClickHandler }) => {
   const [buttonIsVisible,setVisibility] = useState(showButton);
   const addToList = async (e : any) => {
     e.stopPropagation();
     const token = cookies.get('JWT')
-    axios.post(`${REACT_APP_URL}/api/addRestaurant`, 
+    axios.post(`/api/addRestaurant`, 
       {token, restaurant: restaurantName });
     setVisibility(false);
   }

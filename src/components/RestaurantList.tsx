@@ -8,7 +8,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 interface Props {
   businesses: Array<{name:string}>;
-  restaruantClickHandler: (index : number ) => void;
+  restaruantClickHandler: (index : number ) => any;
   showButtons: boolean;
 }
 interface decoded {

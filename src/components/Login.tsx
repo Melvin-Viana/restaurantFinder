@@ -16,7 +16,7 @@ export const Login: React.FC<Props> = ({setJWT}) => {
   const handleChange = (e:any, val:string) =>{setForm(val)}
   const handleLogin = async (loginHandler: Function) => {
     // @ts-ignore: Unreachable code error
-    const getToken = await loginHandler(username, password, envKeys.REACT_APP_URL) 
+    const getToken = await loginHandler(username, password) 
     if(getToken.includes('User') || getToken.includes('Password')) {
       setError(getToken)
     } else {
